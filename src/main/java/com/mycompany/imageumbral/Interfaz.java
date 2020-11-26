@@ -5,8 +5,13 @@
  */
 package com.mycompany.imageumbral;
 
+import java.awt.Point;
+import java.awt.event.WindowAdapter;
+import java.awt.event.WindowEvent;
 import java.io.File;
 import javax.swing.JFileChooser;
+import javax.swing.JFrame;
+import javax.swing.JInternalFrame;
 import javax.swing.JOptionPane;
 import javax.swing.filechooser.FileNameExtensionFilter;
 import org.opencv.core.Core;
@@ -25,9 +30,8 @@ public class Interfaz extends javax.swing.JFrame {
         initComponents();
         nu.pattern.OpenCV.loadShared();
         System.loadLibrary(Core.NATIVE_LIBRARY_NAME);
-        
         this.setLocationRelativeTo(null);
-        this.setResizable(false);
+        cerrarApp();
     }
     
     public void initFiltros(){
@@ -46,36 +50,28 @@ public class Interfaz extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        lienzo1 = new com.mycompany.imageumbral.Lienzo();
+        desktopPrincipal = new javax.swing.JDesktopPane();
         labelTitulo = new javax.swing.JLabel();
         labelCopyFer = new javax.swing.JLabel();
         labelCopyEdu = new javax.swing.JLabel();
+        buttonAbrirImagen = new javax.swing.JButton();
         menuBar = new javax.swing.JMenuBar();
         fileMenu = new javax.swing.JMenu();
         abrirMenuItem = new javax.swing.JMenuItem();
-        guardarMenuItem = new javax.swing.JMenuItem();
         jSeparator1 = new javax.swing.JPopupMenu.Separator();
-        cerrarMenuItem = new javax.swing.JMenuItem();
-        FilterMenu = new javax.swing.JMenu();
-        umbralMenuItem = new javax.swing.JMenuItem();
-        restoreMenuItem = new javax.swing.JMenuItem();
         helpMenu = new javax.swing.JMenu();
         inforMenuItem = new javax.swing.JMenuItem();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setMinimumSize(new java.awt.Dimension(1150, 800));
+        setPreferredSize(new java.awt.Dimension(1150, 800));
 
-        lienzo1.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
-
-        javax.swing.GroupLayout lienzo1Layout = new javax.swing.GroupLayout(lienzo1);
-        lienzo1.setLayout(lienzo1Layout);
-        lienzo1Layout.setHorizontalGroup(
-            lienzo1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 848, Short.MAX_VALUE)
-        );
-        lienzo1Layout.setVerticalGroup(
-            lienzo1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 498, Short.MAX_VALUE)
-        );
+        desktopPrincipal.setPreferredSize(new java.awt.Dimension(1150, 800));
+        desktopPrincipal.addComponentListener(new java.awt.event.ComponentAdapter() {
+            public void componentResized(java.awt.event.ComponentEvent evt) {
+                desktopPrincipalComponentResized(evt);
+            }
+        });
 
         labelTitulo.setFont(new java.awt.Font("Tahoma", 1, 24)); // NOI18N
         labelTitulo.setText("Imagen Umbralizada");
@@ -84,6 +80,51 @@ public class Interfaz extends javax.swing.JFrame {
         labelCopyFer.setText("© Fernando Marcelo Alonso");
 
         labelCopyEdu.setText("    Eduardo Maldonado Fernández");
+
+        buttonAbrirImagen.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        buttonAbrirImagen.setText("Open Image");
+        buttonAbrirImagen.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                buttonAbrirImagenActionPerformed(evt);
+            }
+        });
+
+        desktopPrincipal.setLayer(labelTitulo, javax.swing.JLayeredPane.DEFAULT_LAYER);
+        desktopPrincipal.setLayer(labelCopyFer, javax.swing.JLayeredPane.DEFAULT_LAYER);
+        desktopPrincipal.setLayer(labelCopyEdu, javax.swing.JLayeredPane.DEFAULT_LAYER);
+        desktopPrincipal.setLayer(buttonAbrirImagen, javax.swing.JLayeredPane.DEFAULT_LAYER);
+
+        javax.swing.GroupLayout desktopPrincipalLayout = new javax.swing.GroupLayout(desktopPrincipal);
+        desktopPrincipal.setLayout(desktopPrincipalLayout);
+        desktopPrincipalLayout.setHorizontalGroup(
+            desktopPrincipalLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, desktopPrincipalLayout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGroup(desktopPrincipalLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(labelCopyEdu, javax.swing.GroupLayout.PREFERRED_SIZE, 205, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(labelCopyFer, javax.swing.GroupLayout.PREFERRED_SIZE, 153, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(183, 183, 183))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, desktopPrincipalLayout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(buttonAbrirImagen, javax.swing.GroupLayout.PREFERRED_SIZE, 139, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(284, 284, 284)
+                .addComponent(labelTitulo, javax.swing.GroupLayout.PREFERRED_SIZE, 280, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(308, Short.MAX_VALUE))
+        );
+        desktopPrincipalLayout.setVerticalGroup(
+            desktopPrincipalLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(desktopPrincipalLayout.createSequentialGroup()
+                .addGroup(desktopPrincipalLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(desktopPrincipalLayout.createSequentialGroup()
+                        .addContainerGap()
+                        .addComponent(buttonAbrirImagen, javax.swing.GroupLayout.PREFERRED_SIZE, 67, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(labelTitulo, javax.swing.GroupLayout.PREFERRED_SIZE, 48, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(529, 529, 529)
+                .addComponent(labelCopyFer)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(labelCopyEdu)
+                .addContainerGap(227, Short.MAX_VALUE))
+        );
 
         fileMenu.setText("File");
 
@@ -95,49 +136,9 @@ public class Interfaz extends javax.swing.JFrame {
             }
         });
         fileMenu.add(abrirMenuItem);
-
-        guardarMenuItem.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_S, java.awt.event.InputEvent.CTRL_DOWN_MASK));
-        guardarMenuItem.setText("Save");
-        guardarMenuItem.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                guardarMenuItemActionPerformed(evt);
-            }
-        });
-        fileMenu.add(guardarMenuItem);
         fileMenu.add(jSeparator1);
 
-        cerrarMenuItem.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_E, java.awt.event.InputEvent.CTRL_DOWN_MASK));
-        cerrarMenuItem.setText("Exit");
-        cerrarMenuItem.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                cerrarMenuItemActionPerformed(evt);
-            }
-        });
-        fileMenu.add(cerrarMenuItem);
-
         menuBar.add(fileMenu);
-
-        FilterMenu.setText("Filter");
-
-        umbralMenuItem.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_T, java.awt.event.InputEvent.CTRL_DOWN_MASK));
-        umbralMenuItem.setText("Threshold");
-        umbralMenuItem.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                umbralMenuItemActionPerformed(evt);
-            }
-        });
-        FilterMenu.add(umbralMenuItem);
-
-        restoreMenuItem.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_R, java.awt.event.InputEvent.CTRL_DOWN_MASK));
-        restoreMenuItem.setText(" Restore original image");
-        restoreMenuItem.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                restoreMenuItemActionPerformed(evt);
-            }
-        });
-        FilterMenu.add(restoreMenuItem);
-
-        menuBar.add(FilterMenu);
 
         helpMenu.setText("Help");
 
@@ -158,103 +159,94 @@ public class Interfaz extends javax.swing.JFrame {
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addGap(21, 21, 21)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(lienzo1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addContainerGap(18, Short.MAX_VALUE))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addGap(0, 0, Short.MAX_VALUE)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(labelCopyFer, javax.swing.GroupLayout.PREFERRED_SIZE, 153, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(labelCopyEdu, javax.swing.GroupLayout.PREFERRED_SIZE, 205, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(41, 41, 41))))
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(labelTitulo, javax.swing.GroupLayout.PREFERRED_SIZE, 280, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(301, 301, 301))
+            .addComponent(desktopPrincipal, javax.swing.GroupLayout.DEFAULT_SIZE, 1021, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addGap(39, 39, 39)
-                .addComponent(labelTitulo, javax.swing.GroupLayout.PREFERRED_SIZE, 55, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(lienzo1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(28, 28, 28)
-                .addComponent(labelCopyFer)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(labelCopyEdu)
-                .addContainerGap(68, Short.MAX_VALUE))
+            .addComponent(desktopPrincipal, javax.swing.GroupLayout.DEFAULT_SIZE, 866, Short.MAX_VALUE)
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
     private void inforMenuItemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_inforMenuItemActionPerformed
-        dialog.showMessageDialog(null,"Mediante esta aplicación:\n1. Usted puede seleccionar una imagen '.jpg' o '.png' en el menu File en la opción Open.\n2. Una vez escogida la imagen, se muestra por pantalla.\n3. Para umbralizar la imagen, seleccione el menu Filter y su opción Threshold.\n4. Para guardar la imagen umbralizar, seleccionamos el menu File la opción Save. ","Acerca de", JOptionPane.INFORMATION_MESSAGE);
+        dialog.showMessageDialog(null,"Mediante esta aplicación:\n1. Usted puede seleccionar una imagen '.jpg' o '.png' en el menu File en la opción Open o con el botón 'Open Image'.\n2. Una vez escogida la imagen, se muestra por una ventana interna.\n3. Para umbralizar la imagen, seleccione el menu Filter de la ventana interna de la imagen original y su opción Threshold.\n4. Para guardar la imagen umbralizada, seleccionamos el menu File la opción Save en la ventana interna umbralizada. ","Acerca de", JOptionPane.INFORMATION_MESSAGE);
     }//GEN-LAST:event_inforMenuItemActionPerformed
 
     private void abrirMenuItemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_abrirMenuItemActionPerformed
         initFiltros();
         if(fc.showOpenDialog(null) == JFileChooser.APPROVE_OPTION){
-            lienzo1.updateImage(fc.getSelectedFile());   
+            cerrarVentanas();
+            IntFrameImagen ventanaImagen = new IntFrameImagen(fc.getSelectedFile().getName(),fc.getSelectedFile(),desktopPrincipal);
+            ventanaImagen.setVisible(true);
+            ventanaImagen.setTitle(fc.getSelectedFile().getName());
+            ventanaImagen.setLocation(new Point(50, 80));
+            desktopPrincipal.add(ventanaImagen);
         }
     }//GEN-LAST:event_abrirMenuItemActionPerformed
 
-    private void guardarMenuItemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_guardarMenuItemActionPerformed
-        if(lienzo1.isImage()){
-            if(fc.showSaveDialog(null) == JFileChooser.APPROVE_OPTION){
-                lienzo1.saveImage(fc.getSelectedFile());
+    private void desktopPrincipalComponentResized(java.awt.event.ComponentEvent evt) {//GEN-FIRST:event_desktopPrincipalComponentResized
+        JInternalFrame [] ventanas = desktopPrincipal.getAllFrames();
+        double anchoPr = desktopPrincipal.getWidth();
+        double alturaPr = desktopPrincipal.getHeight();
+        for(JInternalFrame vent : ventanas){
+            Point PointVen = vent.getLocation();
+            double anchoV = vent.getWidth();
+            double alturaV = vent.getHeight();
+            Point newPosition = new Point((int)PointVen.getX(), (int)PointVen.getY());
+            if(PointVen.getY() < 0){
+                newPosition.setLocation(newPosition.getX(),0);
+            }else{
+                if(PointVen.getY()+alturaV > alturaPr){
+                    newPosition.setLocation(PointVen.getX(),(alturaPr - alturaV));
+                }
             }
-        }else{
-            dialog.showMessageDialog(null,"No se está visualizando ninguna imagen actualmente en la aplicación","Imagen no encontrada", JOptionPane.ERROR_MESSAGE);
+            if(PointVen.getX() < 0){
+                newPosition.setLocation(0, newPosition.getY());
+            }else{
+                if(PointVen.getX()+anchoV > anchoPr){
+                    newPosition.setLocation((anchoPr - anchoV), PointVen.getY());
+                }   
+            }
+            vent.setLocation(newPosition);
         }
-    }//GEN-LAST:event_guardarMenuItemActionPerformed
+    }//GEN-LAST:event_desktopPrincipalComponentResized
 
-    private void cerrarMenuItemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cerrarMenuItemActionPerformed
+    private void buttonAbrirImagenActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonAbrirImagenActionPerformed
+        initFiltros();
+        if(fc.showOpenDialog(null) == JFileChooser.APPROVE_OPTION){
+            cerrarVentanas();
+            IntFrameImagen ventanaImagen = new IntFrameImagen(fc.getSelectedFile().getName(),fc.getSelectedFile(),desktopPrincipal);
+            ventanaImagen.setVisible(true);
+            ventanaImagen.setTitle(fc.getSelectedFile().getName());
+            ventanaImagen.setLocation(new Point(50, 80));
+            desktopPrincipal.add(ventanaImagen);
+        }
+    }//GEN-LAST:event_buttonAbrirImagenActionPerformed
+    
+    private void cerrarApp(){
+        this.setDefaultCloseOperation(JFrame.DO_NOTHING_ON_CLOSE);
+        addWindowListener(new WindowAdapter() {
+            public void windowClosing(WindowEvent e){
+                confirmarCerrar();
+            }
+        });
+    }
+    
+    private void confirmarCerrar(){
         int conf = dialog.showConfirmDialog(null, "¿Deseas salir y cerrar la aplicación?", "Cierre del programa", JOptionPane.OK_CANCEL_OPTION);
         if(conf ==JFileChooser.APPROVE_OPTION){
             dispose();
         }
-    }//GEN-LAST:event_cerrarMenuItemActionPerformed
-
-    private void restoreMenuItemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_restoreMenuItemActionPerformed
-        if(lienzo1.isImage()){
-            lienzo1.restoreImage();
-        }else{
-            dialog.showMessageDialog(null, "Hay que abrir una imagen para poder restaurarla","No hay imagen", JOptionPane.ERROR_MESSAGE);
+    }
+   
+    private void cerrarVentanas(){
+        JInternalFrame [] ventanas = desktopPrincipal.getAllFrames();
+        for(JInternalFrame ventana : ventanas){
+            ventana.dispose();
         }
-    }//GEN-LAST:event_restoreMenuItemActionPerformed
-
-    private void umbralMenuItemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_umbralMenuItemActionPerformed
-        if(lienzo1.isImage()){
-            String umbral = dialog.showInputDialog(null,"Introduzca el valor del umbral para la imagen","Valor umbral", JOptionPane.QUESTION_MESSAGE);
-            if(!checkUmbral(umbral) && umbral != null ){
-                dialog.showMessageDialog(null,"Error al introducir el valor umbral: Debe ser un número entero y con un rango de 0 a 255","Dato inválido", JOptionPane.ERROR_MESSAGE);
-            }else if(umbral != null){
-                lienzo1.umbralizar(Integer.parseInt(umbral));
-            }
-        }else{
-             dialog.showMessageDialog(null,"Hay que abrir una imagen para poder umbralizarla","No hay imagen", JOptionPane.ERROR_MESSAGE);
-        }
-    }//GEN-LAST:event_umbralMenuItemActionPerformed
-    
-    private boolean checkUmbral(String input){
-        int umbral;
-        try { 
-        umbral = Integer.parseInt(input); 
-        } catch(NumberFormatException e) { 
-            return false; 
-        } catch(NullPointerException e) {
-            return false;
-        }
-        return !(umbral > 255 || umbral < 0);
     }
     
-    
- 
     public static void main(String args[]) {
         /* Set the Nimbus look and feel */
         //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
@@ -288,20 +280,16 @@ public class Interfaz extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JMenu FilterMenu;
     private javax.swing.JMenuItem abrirMenuItem;
-    private javax.swing.JMenuItem cerrarMenuItem;
+    private javax.swing.JButton buttonAbrirImagen;
+    private javax.swing.JDesktopPane desktopPrincipal;
     private javax.swing.JMenu fileMenu;
-    private javax.swing.JMenuItem guardarMenuItem;
     private javax.swing.JMenu helpMenu;
     private javax.swing.JMenuItem inforMenuItem;
     private javax.swing.JPopupMenu.Separator jSeparator1;
     private javax.swing.JLabel labelCopyEdu;
     private javax.swing.JLabel labelCopyFer;
     private javax.swing.JLabel labelTitulo;
-    private com.mycompany.imageumbral.Lienzo lienzo1;
     private javax.swing.JMenuBar menuBar;
-    private javax.swing.JMenuItem restoreMenuItem;
-    private javax.swing.JMenuItem umbralMenuItem;
     // End of variables declaration//GEN-END:variables
 }

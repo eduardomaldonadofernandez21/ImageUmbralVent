@@ -70,7 +70,7 @@ public class Lienzo extends JPanel {
     }
     
     public void saveImage(File fichero){
-        Imgcodecs.imwrite(fichero.getAbsolutePath(), img);
+        Imgcodecs.imwrite(fichero.getAbsolutePath()+".jpg", img);
     }
     
     private void displayImage (){
